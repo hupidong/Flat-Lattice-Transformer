@@ -10,10 +10,10 @@ import torch
 import torch.nn as nn
 
 from fastNLP.core import logger
-from fastNLP.modules.utils import _get_file_name_base_on_postfix
+from fastNLP.io.file_utils import _get_file_name_base_on_postfix
 from utils import MyDropout
 from fastNLP.embeddings.contextual_embedding import ContextualEmbedding
-from fastNLP.embeddings.bert_embedding import _WordBertModel
+from fastNLP.embeddings.bert_embedding import _BertWordModel
 from fastNLP.io.file_utils import PRETRAINED_BERT_MODEL_DIR
 
 class StaticEmbedding(TokenEmbedding):
@@ -359,7 +359,7 @@ class BertEmbedding(ContextualEmbedding):
         if '[SEP]' in vocab:
             self._word_sep_index = vocab['[SEP]']
 
-        self.model = _WordBertModel(model_dir_or_name=model_dir_or_name, vocab=vocab, layers=layers,
+        self.model = _BertWordModel(model_dir_or_name=model_dir_or_name, vocab=vocab, layers=layers,
                                     pool_method=pool_method, include_cls_sep=include_cls_sep,
                                     pooled_cls=pooled_cls, auto_truncate=auto_truncate, min_freq=2)
 
